@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/tri-shieldsecurity-1/static/css/main.e7c72498.css",
-    "main.js": "/tri-shieldsecurity-1/static/js/main.5219c534.js",
-    "index.html": "/tri-shieldsecurity-1/index.html",
-    "main.e7c72498.css.map": "/tri-shieldsecurity-1/static/css/main.e7c72498.css.map",
-    "main.5219c534.js.map": "/tri-shieldsecurity-1/static/js/main.5219c534.js.map"
+    "main.css": "/tri-shieldsecurity/static/css/main.e7c72498.css",
+    "main.js": "/tri-shieldsecurity/static/js/main.5219c534.js",
+    "index.html": "/tri-shieldsecurity/index.html",
+    "main.e7c72498.css.map": "/tri-shieldsecurity/static/css/main.e7c72498.css.map",
+    "main.5219c534.js.map": "/tri-shieldsecurity/static/js/main.5219c534.js.map"
   },
   "entrypoints": [
     "static/css/main.e7c72498.css",
