@@ -9,7 +9,7 @@ const Header = () => {
       <div className="header-container">
         <a className="header-logo" href="/">
           <img src={logo} alt="Tri-Shield Security logo" />
-
+        
           <span className="logo-text">
             <span className="logo-name">
               TRI-<span className="logo-highlight">Shield</span>
