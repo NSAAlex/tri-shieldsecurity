@@ -1,0 +1,54 @@
+.threats-section {
+  background: #101f40;
+}
+
+.threats-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+
+.threats-intro p {
+  max-width: 480px;
+}
+
+.threats-link {
+  display: inline-block;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.threat-card {
+  min-height: 300px;
+  padding: 20px;
+}
+
+.threat-card .card-icon {
+  height: 120px;
+  background:
+    radial-gradient(circle, #174b68 0%, #112c4d 40%, #0d1830 75%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  border-bottom: 2px solid var(--cyan);
+  margin: 0 0 12px;
+}
+
+.threat-card h3 {
+  font-size: 15px;
+}
+
+.threat-card p {
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .threats-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

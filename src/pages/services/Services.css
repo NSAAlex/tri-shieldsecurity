@@ -1,0 +1,11 @@
+.services-section {
+  background: #101f40;
+}
+
+.services-section h2 {
+  margin-bottom: 10px;
+}
+
+.services-section .info-card {
+  min-height: 215px;
+}

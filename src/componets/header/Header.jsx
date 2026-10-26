@@ -1,7 +1,7 @@
 
 import "./Header.css";
 import logo from "./images/shield.png";
-import Navigation from "../Navigation/Navigation";
+import Navigation from "../navigation/Navigation";
 
 const Header = () => {
   return (

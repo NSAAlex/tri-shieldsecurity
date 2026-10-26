@@ -1,0 +1,26 @@
+.solutions-section {
+  background: #101f40;
+}
+
+.solutions-description {
+  max-width: 460px;
+  margin-top: 18px;
+  margin-bottom: 22px;
+}
+
+.solution-card {
+  min-height: 190px;
+}
+
+.solution-card .card-icon {
+  margin-top: 0;
+  font-size: 27px;
+}
+
+.solution-card h3 {
+  font-size: 14px;
+}
+
+.solution-card p {
+  font-size: 12px;
+}
