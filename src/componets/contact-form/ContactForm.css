@@ -1,0 +1,107 @@
+
+.contact-form-card {
+  padding: 25px;
+  background: #0d1830;
+  border: 1px solid #35c5e8;
+  border-radius: 5px;
+}
+
+.contact-form-card h2 {
+  color: #ffffff;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 21px;
+  margin: 0 0 18px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contact-form .form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.contact-form .form-field label {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.contact-form .form-field input,
+.contact-form .form-field select,
+.contact-form .form-field textarea {
+  display: block;
+  width: 100%;
+  padding: 11px 12px;
+  background: #101f40;
+  color: #ffffff;
+  border: 1px solid #1a2c4e;
+  border-radius: 2px;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.contact-form .form-field input:focus,
+.contact-form .form-field select:focus,
+.contact-form .form-field textarea:focus {
+  border-color: #35c5e8;
+}
+
+.contact-form .form-field input::placeholder,
+.contact-form .form-field textarea::placeholder {
+  color: #7185a6;
+}
+
+.contact-form .form-field select {
+  cursor: pointer;
+}
+
+.contact-form .form-field select option {
+  background: #101f40;
+  color: #ffffff;
+}
+
+.contact-form .form-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.contact-submit {
+  align-self: flex-start;
+  background: #35c5e8;
+  color: #08172c;
+  border: none;
+  border-radius: 3px;
+  padding: 13px 25px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.contact-submit:hover {
+  background: #62d9f3;
+}
+
+.contact-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .contact-form-card {
+    padding: 20px;
+  }
+
+  .contact-submit {
+    width: 100%;
+  }
+}

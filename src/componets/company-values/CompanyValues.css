@@ -1,0 +1,42 @@
+
+.about-section {
+  padding-top: 48px;
+  padding-bottom: 70px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+}
+
+.mission-content h2 {
+  margin-bottom: 22px;
+}
+
+.mission-content > p:last-child {
+  max-width: 440px;
+}
+
+.values-grid {
+  margin-top: 10px;
+  gap: 20px;
+}
+
+.values-grid .info-card {
+  min-height: 125px;
+  padding: 17px;
+}
+
+.values-grid .card-icon {
+  margin: 0 0 12px;
+  font-size: 25px;
+}
+
+/* Tablet and Mobile */
+@media (max-width: 800px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+}
