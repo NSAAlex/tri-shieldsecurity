@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/tri-shieldsecurity/static/css/main.4f6c90de.css",
-    "main.js": "/tri-shieldsecurity/static/js/main.a9d696b0.js",
+    "main.css": "/tri-shieldsecurity/static/css/main.5bc299bd.css",
+    "main.js": "/tri-shieldsecurity/static/js/main.7a9a40c4.js",
     "static/media/logo-hero.png": "/tri-shieldsecurity/static/media/logo-hero.62bf5bee3056abf544fc.png",
     "static/media/solutions-hero.jpg": "/tri-shieldsecurity/static/media/solutions-hero.7771d64d340efa55e3c6.jpg",
     "static/media/about-hero.jpg": "/tri-shieldsecurity/static/media/about-hero.3b3f0e7ab3934f28948a.jpg",
     "static/media/cyber-threats-hero.jpg": "/tri-shieldsecurity/static/media/cyber-threats-hero.0b6ea5a62009560a6397.jpg",
     "static/media/services-hero.jpg": "/tri-shieldsecurity/static/media/services-hero.458e43137d97c20de657.jpg",
     "index.html": "/tri-shieldsecurity/index.html",
-    "main.4f6c90de.css.map": "/tri-shieldsecurity/static/css/main.4f6c90de.css.map",
-    "main.a9d696b0.js.map": "/tri-shieldsecurity/static/js/main.a9d696b0.js.map"
+    "main.5bc299bd.css.map": "/tri-shieldsecurity/static/css/main.5bc299bd.css.map",
+    "main.7a9a40c4.js.map": "/tri-shieldsecurity/static/js/main.7a9a40c4.js.map"
   },
   "entrypoints": [
-    "static/css/main.4f6c90de.css",
-    "static/js/main.a9d696b0.js"
+    "static/css/main.5bc299bd.css",
+    "static/js/main.7a9a40c4.js"
   ]
 }
