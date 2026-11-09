@@ -52,3 +52,23 @@
     gap: 20px;
   }
 }
+
+
+/* Live server loading message */
+.threat-status {
+  text-align: center;
+  padding: 45px 20px;
+  margin: 25px 0;
+  color: #35c5e8;
+  background: #0d1830;
+  border: 1px solid #24496b;
+  border-radius: 6px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 17px;
+}
+
+/* Server connection error */
+.threat-error {
+  color: #ff9090;
+  border-color: #b34b59;
+}
