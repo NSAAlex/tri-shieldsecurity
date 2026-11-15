@@ -1,0 +1,110 @@
+
+.threat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 10, 25, 0.88);
+  backdrop-filter: blur(7px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.threat-modal {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #101f40;
+  color: #ffffff;
+  border: 1px solid #35c5e8;
+  border-radius: 18px;
+  padding: 38px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+}
+
+.threat-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.threat-modal h2 {
+  color: #ffffff;
+  font-size: clamp(28px, 5vw, 42px);
+  margin: 10px 0 18px;
+}
+
+.threat-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.threat-modal-tags span {
+  background: #173453;
+  color: #35c5e8;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.threat-modal-description {
+  color: #d2ddeb;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.threat-modal-details {
+  display: grid;
+  gap: 18px;
+}
+
+.threat-modal-details > div {
+  background: #142a4b;
+  border-left: 3px solid #35c5e8;
+  padding: 18px;
+  border-radius: 8px;
+}
+
+.threat-modal-details h3 {
+  color: #35c5e8;
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+.threat-modal-details p {
+  color: #e2eaf4;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.threat-modal-action {
+  margin-top: 26px;
+  padding: 13px 24px;
+  border: none;
+  border-radius: 8px;
+  background: #35c5e8;
+  color: #101f40;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.threat-modal-action:hover {
+  background: #80e4f7;
+}
+
+@media (max-width: 600px) {
+  .threat-modal {
+    padding: 28px 20px;
+  }
+}

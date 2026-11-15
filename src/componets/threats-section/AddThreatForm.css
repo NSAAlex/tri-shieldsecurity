@@ -1,0 +1,125 @@
+
+.add-threat-section {
+  margin-top: 85px;
+  padding: 45px;
+  background: #101f40;
+  border: 1px solid #264c70;
+  border-radius: 18px;
+}
+
+.add-threat-heading {
+  margin-bottom: 30px;
+}
+
+.add-threat-heading h2 {
+  color: #ffffff;
+  margin: 12px 0;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.add-threat-heading > p:last-child {
+  color: #c8d7e8;
+  line-height: 1.7;
+}
+
+.add-threat-form {
+  display: grid;
+  gap: 22px;
+}
+
+.add-threat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.threat-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 8px;
+}
+
+.threat-field label {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.threat-field input,
+.threat-field select,
+.threat-field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #0b1933;
+  color: #ffffff;
+  border: 1px solid #365679;
+  border-radius: 8px;
+  padding: 14px 15px;
+  font: inherit;
+  outline: none;
+}
+
+.threat-field textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.threat-field input:focus,
+.threat-field select:focus,
+.threat-field textarea:focus {
+  border-color: #35c5e8;
+  box-shadow: 0 0 0 3px rgba(53, 197, 232, 0.15);
+}
+
+.threat-field input::placeholder,
+.threat-field textarea::placeholder {
+  color: #93a9c2;
+}
+
+.threat-field small,
+.threat-form-error {
+  color: #ff9d9d;
+}
+
+.threat-form-success {
+  color: #86f0bd;
+  font-weight: 700;
+}
+
+.threat-submit-button {
+  width: fit-content;
+  padding: 15px 30px;
+  background: #35c5e8;
+  color: #101f40;
+  border: none;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.threat-submit-button:hover:not(:disabled) {
+  background: #80e4f7;
+}
+
+.threat-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .add-threat-section {
+    margin-top: 55px;
+    padding: 24px 18px;
+  }
+
+  .add-threat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .threat-submit-button {
+    width: 100%;
+  }
+}

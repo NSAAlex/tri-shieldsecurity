@@ -72,3 +72,26 @@
   color: #ff9090;
   border-color: #b34b59;
 }
+
+
+/* Project Part 12: interactive cybersecurity cards */
+
+.clickable-threat {
+  cursor: pointer;
+  height: 100%;
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+}
+
+.clickable-threat:hover {
+  transform: translateY(-5px);
+}
+
+.clickable-threat:focus-visible {
+  outline: 3px solid #35c5e8;
+  outline-offset: 4px;
+}
+
+.clickable-threat > * {
+  height: 100%;
+}

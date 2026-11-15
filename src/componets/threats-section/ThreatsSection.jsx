@@ -1,10 +1,11 @@
 
 import React, { useEffect, useState } from "react";
 import InfoCard from "../cards/InfoCard";
+import ThreatModal from "./ThreatModal";
+import AddThreatForm from "./AddThreatForm";
 import { Tooltip } from "react-tooltip";
 import "./ThreatsSection.css";
 
-// PROJECT: Data is loaded from our live Render backend.
 const API_URL =
   "https://hello-world-n9kj.onrender.com/api/threats";
 
@@ -23,8 +24,8 @@ function ThreatsSection() {
   const [threats, setThreats] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedThreat, setSelectedThreat] = useState(null);
 
-  // Fetch the cybersecurity threats when the page loads.
   useEffect(() => {
     const controller = new AbortController();
 
@@ -46,7 +47,6 @@ function ThreatsSection() {
 
         setThreats(data);
         setError("");
-        console.log("React successfully loaded threats:", data);
       } catch (err) {
         if (err.name !== "AbortError") {
           console.error("API error:", err);
@@ -63,6 +63,13 @@ function ThreatsSection() {
 
     return () => controller.abort();
   }, []);
+
+  function handleThreatAdded(newThreat) {
+    setThreats((previousThreats) => [
+      ...previousThreats,
+      newThreat
+    ]);
+  }
 
   return (
     <section className="section threats-section">
@@ -111,18 +118,32 @@ function ThreatsSection() {
 
         {!loading && !error && (
           <>
-            {/* Cyber threats retrieved from Render */}
             <div className="cards-grid four" id="threat-list">
               {threats.map((threat) => (
                 <div
                   key={threat._id}
+                  className="clickable-threat"
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => setSelectedThreat(threat)}
+                  onKeyDown={(event) => {
+                    if (
+                      event.key === "Enter" ||
+                      event.key === " "
+                    ) {
+                      event.preventDefault();
+                      setSelectedThreat(threat);
+                    }
+                  }}
                   data-tooltip-id="security-risk-tooltip"
                   data-tooltip-content={
                     threat.severity === "Critical"
                       ? "Critical risk: severe business disruption."
                       : threat.severity === "High"
                       ? "High risk: strong security controls needed."
-                      : "Medium risk: preventive measures recommended."
+                      : threat.severity === "Medium"
+                      ? "Medium risk: preventive measures recommended."
+                      : "Low risk: monitor and maintain protections."
                   }
                 >
                   <InfoCard
@@ -132,7 +153,6 @@ function ThreatsSection() {
                     severity={threat.severity}
                     category={threat.category}
                     variant="threat-card"
-                    link="/services"
                   />
                 </div>
               ))}
@@ -150,9 +170,22 @@ function ThreatsSection() {
             />
           </>
         )}
+
+        <AddThreatForm
+          apiUrl={API_URL}
+          onThreatAdded={handleThreatAdded}
+        />
+
+        {selectedThreat && (
+          <ThreatModal
+            threat={selectedThreat}
+            onClose={() => setSelectedThreat(null)}
+          />
+        )}
       </div>
     </section>
   );
 }
 
 export default ThreatsSection;
+
