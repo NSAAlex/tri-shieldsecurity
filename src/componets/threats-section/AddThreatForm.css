@@ -123,3 +123,42 @@
     width: 100%;
   }
 }
+
+/* PROJECT PART 13: Edit form buttons */
+
+.threat-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.threat-cancel-button {
+  background: transparent;
+  color: #35c5e8;
+  border: 1px solid #35c5e8;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.threat-cancel-button:hover {
+  background: #35c5e8;
+  color: #101f40;
+}
+
+.threat-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .threat-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

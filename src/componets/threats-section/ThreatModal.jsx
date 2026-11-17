@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import "./ThreatModal.css";
 
-function ThreatModal({ threat, onClose }) {
+function ThreatModal({ threat, onClose, onEdit, onDelete }) {
   useEffect(() => {
     function handleEscape(event) {
       if (event.key === "Escape") {
@@ -18,6 +18,17 @@ function ThreatModal({ threat, onClose }) {
       document.body.style.overflow = "";
     };
   }, [onClose]);
+
+  // PROJECT PART 13: Confirm before deleting a threat.
+  function handleDelete() {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${threat.name}"?`
+    );
+
+    if (confirmed) {
+      onDelete(threat._id);
+    }
+  }
 
   return (
     <div
@@ -74,13 +85,32 @@ function ThreatModal({ threat, onClose }) {
           </div>
         </div>
 
-        <button
-          type="button"
-          className="threat-modal-action"
-          onClick={onClose}
-        >
-          Back to Threats
-        </button>
+        {/* PROJECT PART 13: Edit and Delete buttons */}
+        <div className="threat-modal-actions">
+          <button
+            type="button"
+            className="threat-edit-button"
+            onClick={() => onEdit(threat)}
+          >
+            Edit Threat
+          </button>
+
+          <button
+            type="button"
+            className="threat-delete-button"
+            onClick={handleDelete}
+          >
+            Delete Threat
+          </button>
+
+          <button
+            type="button"
+            className="threat-modal-action"
+            onClick={onClose}
+          >
+            Back to Threats
+          </button>
+        </div>
       </div>
     </div>
   );

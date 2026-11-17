@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddThreatForm.css";
 
 const initialForm = {
@@ -54,11 +54,39 @@ function validateForm(form) {
   return errors;
 }
 
-function AddThreatForm({ apiUrl, onThreatAdded }) {
+function AddThreatForm({
+  apiUrl,
+  onThreatAdded,
+  onThreatUpdated,
+  editingThreat,
+  onCancelEdit
+}) {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  const isEditing = Boolean(editingThreat);
+
+  // PROJECT PART 13: Populate the form when editing a threat.
+  useEffect(() => {
+    if (editingThreat) {
+      setForm({
+        name: editingThreat.name,
+        severity: editingThreat.severity,
+        category: editingThreat.category,
+        common_target: editingThreat.common_target,
+        description: editingThreat.description,
+        how_it_works: editingThreat.how_it_works,
+        how_we_defend: editingThreat.how_we_defend
+      });
+    } else {
+      setForm({ ...initialForm });
+    }
+
+    setErrors({});
+    setStatus("");
+  }, [editingThreat]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -91,8 +119,13 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
     setStatus("");
 
     try {
-      const response = await fetch(apiUrl, {
-        method: "POST",
+      // PROJECT PART 13: Use PUT when editing and POST when adding.
+      const requestUrl = isEditing
+        ? `${apiUrl}/${editingThreat._id}`
+        : apiUrl;
+
+      const response = await fetch(requestUrl, {
+        method: isEditing ? "PUT" : "POST",
         headers: {
           "Content-Type": "application/json"
         },
@@ -108,20 +141,31 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
 
       const data = await response.json();
 
-      if (!response.ok || !data.success || !data.threat) {
+      if (
+        !response.ok ||
+        (isEditing && response.status !== 200) ||
+        !data.success ||
+        !data.threat
+      ) {
         throw new Error(
           data.errors?.join(" ") ||
           data.message ||
-          "Unable to add threat."
+          "Unable to save threat."
         );
       }
 
-      onThreatAdded(data.threat);
-      setForm({ ...initialForm });
+      if (isEditing) {
+        onThreatUpdated(data.threat);
+        setStatus("updated");
+      } else {
+        onThreatAdded(data.threat);
+        setForm({ ...initialForm });
+        setStatus("success");
+      }
+
       setErrors({});
-      setStatus("success");
     } catch (error) {
-      console.error("POST request failed:", error);
+      console.error("Threat request failed:", error);
       setStatus(error.message);
     } finally {
       setSubmitting(false);
@@ -132,18 +176,30 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
     <div className="add-threat-section" id="report-threat">
       <div className="add-threat-heading">
         <p className="section-label">
-          CONTRIBUTE TO CYBER DEFENSE
+          {isEditing
+            ? "UPDATE THREAT INTELLIGENCE"
+            : "CONTRIBUTE TO CYBER DEFENSE"}
         </p>
+
         <h2>
-          REPORT A <span className="accent">NEW THREAT.</span>
+          {isEditing ? "EDIT " : "REPORT A "}
+          <span className="accent">
+            {isEditing ? "CYBER THREAT." : "NEW THREAT."}
+          </span>
         </h2>
+
         <p>
-          Help expand our cybersecurity threat intelligence.
-          Submit a threat and watch it appear in the list above.
+          {isEditing
+            ? "Update the cybersecurity threat information using the form below."
+            : "Help expand our cybersecurity threat intelligence. Submit a threat and watch it appear in the list above."}
         </p>
       </div>
 
-      <form className="add-threat-form" onSubmit={handleSubmit} noValidate>
+      <form
+        className="add-threat-form"
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div className="add-threat-grid">
           <div className="threat-field">
             <label htmlFor="threat-name">Threat Name</label>
@@ -154,9 +210,12 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               onChange={handleChange}
               placeholder="e.g. QR Code Phishing"
               maxLength={60}
+              disabled={submitting}
               required
             />
-            {errors.name && <small role="alert">{errors.name}</small>}
+            {errors.name && (
+              <small role="alert">{errors.name}</small>
+            )}
           </div>
 
           <div className="threat-field">
@@ -166,6 +225,7 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               name="severity"
               value={form.severity}
               onChange={handleChange}
+              disabled={submitting}
               required
             >
               <option value="">Select severity</option>
@@ -174,6 +234,7 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               <option value="High">High</option>
               <option value="Critical">Critical</option>
             </select>
+
             {errors.severity && (
               <small role="alert">{errors.severity}</small>
             )}
@@ -188,8 +249,10 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               onChange={handleChange}
               placeholder="e.g. Social engineering"
               maxLength={60}
+              disabled={submitting}
               required
             />
+
             {errors.category && (
               <small role="alert">{errors.category}</small>
             )}
@@ -204,8 +267,10 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               onChange={handleChange}
               placeholder="e.g. Mobile device users"
               maxLength={100}
+              disabled={submitting}
               required
             />
+
             {errors.common_target && (
               <small role="alert">{errors.common_target}</small>
             )}
@@ -218,7 +283,10 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
           ["how_we_defend", "How TRI-Shield Defends", 1000]
         ].map(([name, label, maxLength]) => (
           <div className="threat-field" key={name}>
-            <label htmlFor={`threat-${name}`}>{label}</label>
+            <label htmlFor={`threat-${name}`}>
+              {label}
+            </label>
+
             <textarea
               id={`threat-${name}`}
               name={name}
@@ -227,8 +295,10 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
               maxLength={maxLength}
               rows={4}
               placeholder={`Enter ${label.toLowerCase()}...`}
+              disabled={submitting}
               required
             />
+
             {errors[name] && (
               <small role="alert">{errors[name]}</small>
             )}
@@ -238,7 +308,7 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
         {status && (
           <p
             className={
-              status === "success"
+              status === "success" || status === "updated"
                 ? "threat-form-success"
                 : "threat-form-error"
             }
@@ -246,17 +316,36 @@ function AddThreatForm({ apiUrl, onThreatAdded }) {
           >
             {status === "success"
               ? "Threat successfully added! View it in the list above."
+              : status === "updated"
+              ? "Threat successfully updated!"
               : status}
           </p>
         )}
 
-        <button
-          className="threat-submit-button"
-          type="submit"
-          disabled={submitting}
-        >
-          {submitting ? "Submitting..." : "Submit Cyber Threat"}
-        </button>
+        <div className="threat-form-actions">
+          <button
+            className="threat-submit-button"
+            type="submit"
+            disabled={submitting}
+          >
+            {submitting
+              ? "Saving..."
+              : isEditing
+              ? "Save Changes"
+              : "Submit Cyber Threat"}
+          </button>
+
+          {isEditing && (
+            <button
+              className="threat-cancel-button"
+              type="button"
+              onClick={onCancelEdit}
+              disabled={submitting}
+            >
+              Cancel Edit
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );
